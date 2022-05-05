@@ -1,0 +1,117 @@
+{% load static %}
+<form action="res">
+    <div style="display: grid; grid-template-columns: 1fr 1fr;">
+      <div id="parentId">
+        <div>
+          <nobr>
+              <p>Параметры для треугольных функций</p>
+              <input name="triangle_parameters[0]" type="text" value = "1" style="width:100px;" />
+              <input name="triangle_parameters[0]" type="text" value = "12" style="width:100px;" />
+              <input name="triangle_parameters[0]" type="text" value = "15" style="width:100px;" />
+              <a style="color:red;" onclick="return deleteField(this)" href="#">[—]</a>
+              <a style="color:green;" onclick="return addField()" href="#">[+]</a>
+            </nobr>
+          </div>
+      </div>
+      <div id="parentId1">
+          <div>
+          <nobr>
+              <p>Параметры для трапецивидных функций</p>
+              <input name="trapez_parameters[0]" type="text" value = "3" style="width:100px;" />
+              <input name="trapez_parameters[0]" type="text" value = "5" style="width:100px;" />
+              <input name="trapez_parameters[0]" type="text" value = "9" style="width:100px;" />
+              <input name="trapez_parameters[0]" type="text" value = "13" style="width:100px;" />
+              <a style="color:red;" onclick="return deleteField1(this)" href="#">[—]</a>
+              <a style="color:green;" onclick="return addField1()" href="#">[+]</a>
+            </nobr>
+          </div>
+      </div>
+    </div>
+    <input type="submit">
+</form>
+<!--<canvas id="myChart" width="400" height="400"></canvas>-->
+
+<!--        <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>-->
+<!--        <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>-->
+<!--        <script type="text/javascript">-->
+<!--            $.get('{% url "line_chart_json" %}', function(data) {-->
+<!--                var ctx = $("#myChart").get(0).getContext("2d");-->
+<!--                new Chart(ctx, {-->
+<!--                    type: 'line',-->
+<!--                    data: data,-->
+<!--                    options: {-->
+<!--                         maintainAspectRatio: false,-->
+<!--                         responsive: false,-->
+<!--                         elements: {-->
+<!--                            line: {-->
+<!--                                tension: 0-->
+<!--                            }-->
+<!--                        }-->
+<!--                    }-->
+<!--                });-->
+<!--            });-->
+<!--        </script>-->
+<!--</body>-->
+
+<script>
+var countOfFields = 1;
+var curFieldNameId = 0;
+var maxFieldLimit = 25;
+var countOfFields1 = 1;
+var curFieldNameId1 = 0;
+var maxFieldLimit1 = 25;
+function deleteField(a) {
+  if (countOfFields > 1)
+  {
+ var contDiv = a.parentNode;
+ contDiv.parentNode.removeChild(contDiv);
+ countOfFields--;
+ }
+ return false;
+}
+function addField() {
+ if (countOfFields >= maxFieldLimit) {
+ alert("Число полей достигло своего максимума = " + maxFieldLimit);
+ return false;
+ }
+ countOfFields++;
+ curFieldNameId++;
+ var div = document.createElement("div");
+ div.innerHTML = "<nobr><input name=\"triangle_parameters[" + curFieldNameId + "]\" type=\"text\" style=\"width:100px;\" /> " +
+ "<input name=\"triangle_parameters[" + curFieldNameId + "]\" type=\"text\" style=\"width:100px;\" /> " +
+ "<input name=\"triangle_parameters[" + curFieldNameId + "]\" type=\"text\" style=\"width:100px;\" /> " +
+ "<a style=\"color:red;\" onclick=\"return deleteField(this)\" href=\"#\">[—]</a> " +
+ "<a style=\"color:green;\" onclick=\"return addField()\" href=\"#\">[+]</a></nobr>";
+ document.getElementById("parentId").appendChild(div);
+ return false;
+}
+var countOfFields1 = 1;
+var curFieldNameId1 = 0;
+var maxFieldLimit1 = 25;
+function deleteField1(a) {
+  if (countOfFields1 > 1)
+  {
+ var contDiv = a.parentNode;
+ contDiv.parentNode.removeChild(contDiv);
+ countOfFields1--;
+ }
+ return false;
+}
+function addField1() {
+ if (countOfFields1 >= maxFieldLimit1) {
+ alert("Число полей достигло своего максимума = " + maxFieldLimit1);
+ return false;
+ }
+ countOfFields1++;
+ curFieldNameId1++;
+ var div = document.createElement("div");
+ div.innerHTML = "<nobr><input name=\"trapez_parameters[" + curFieldNameId1 + "]\" type=\"text\" style=\"width:100px;\" /> " +
+ "<input name=\"trapez_parameters[" + curFieldNameId1 + "]\" type=\"text\" style=\"width:100px;\" /> " +
+ "<input name=\"trapez_parameters[" + curFieldNameId1 + "]\" type=\"text\" style=\"width:100px;\" /> " +
+ "<input name=\"trapez_parameters[" + curFieldNameId1 + "]\" type=\"text\" style=\"width:100px;\" /> " +
+ "<a style=\"color:red;\" onclick=\"return deleteField1(this)\" href=\"#\">[—]</a> " +
+ "<a style=\"color:green;\" onclick=\"return addField1()\" href=\"#\">[+]</a></nobr>";
+ document.getElementById("parentId1").appendChild(div);
+ return false;
+}
+</script>

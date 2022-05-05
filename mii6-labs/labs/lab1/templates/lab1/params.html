@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    body: {
+        background-color: #d24dff;
+    }
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <form action="">
+    <p>
+        {% for i in pars %}
+        <p>Параметры для функции принадлежности {{ i }} (Комфортная температура для России)</p>
+        <p>{{ pars }}</p>
+        a: <input type="text" name=a[{{ i }}]>
+        b: <input type="text" name=b[{{ i }}]>
+        c: <input type="text" name=c[{{ i }}]><br>
+        {% endfor %}
+
+<!--        <p>Параметры для функции принадлежности 1 (Комфортная температура для России)</p>-->
+<!--        a: <input type="text" value={{ pars.0 }} name="a">-->
+<!--        b: <input type="text" value={{ pars.1 }} name="b">-->
+<!--        c: <input type="text" value={{ pars.2 }} name="c"><br>-->
+<!--        <p>Параметры для функции принадлежности 2 (Комфортная температура для Франции)</p>-->
+<!--        a: <input type="text" value={{ pars2.0 }} name="a2">-->
+<!--        b: <input type="text" value={{ pars2.1 }} name="b2">-->
+<!--        c: <input type="text" value={{ pars2.2 }} name="c2"><br>-->
+        <p>Комнатная температура: <input type="text" value={{ temp }} name="temp"><p/>
+        <input type="submit">
+    </p>
+    </form>
+{% block content %}
+<p>Значение функции принадлежности Франции {{ res_france }} <br></p>
+<p>Значение функции принадлежности России {{ res_russia }} <br></p>
+{% endblock %}
+</div>
+
+<script type="text/javascript">
+    console.log('pars', this)
+</script>
+<canvas id="myChart" width="400" height="400"></canvas>
+
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+        <script type="text/javascript">
+            $.get('{% url "line_chart_json" %}', function(data) {
+                var ctx = $("#myChart").get(0).getContext("2d");
+                new Chart(ctx, {
+                    type: 'line',
+                    data: data,
+                    options: {
+                         maintainAspectRatio: false,
+                         responsive: false,
+                         elements: {
+                            line: {
+                                tension: 0
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+</body>
+</html>

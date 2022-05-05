@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    body: {
+        background-color: #d24dff;
+    }
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <div>
+        <canvas id="myChart" width="1400" height="250"></canvas>
+    </div>
+
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+        <script type="text/javascript">
+            $.get('{% url "line_chart_json4" %}', function(data) {
+                var ctx = $("#myChart").get(0).getContext("2d");
+                new Chart(ctx, {
+                    type: 'line',
+                    data: data,
+                    options: {
+                         maintainAspectRatio: false,
+                         responsive: false,
+                         elements: {
+                            line: {
+                                tension: 0
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+
+    <div>
+        <canvas id="myChart2" width="1400" height="250"></canvas>
+    </div>
+
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+        <script type="text/javascript">
+            $.get('{% url "line_chart_json_clear_time_series" %}', function(data) {
+                var ctx = $("#myChart2").get(0).getContext("2d");
+
+                new Chart(ctx, {
+                    type: 'line',
+                    data: data,
+
+                    options: {
+                         maintainAspectRatio: false,
+                         responsive: false,
+                         elements: {
+                            line: {
+                                tension: 0
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+
+    <div>
+        <canvas id="myChart3" width="1400" height="250"></canvas>
+    </div>
+
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+        <script type="text/javascript">
+            $.get('{% url "line_chart_json_fuzzy_time_series" %}', function(data) {
+                var ctx = $("#myChart3").get(0).getContext("2d");
+                new Chart(ctx, {
+                    type: 'line',
+                    data: data,
+                    options: {
+                         maintainAspectRatio: false,
+                         responsive: false,
+                         elements: {
+                            line: {
+                                tension: 0
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+
+        <div>
+        <canvas id="myChart4" width="1400" height="250"></canvas>
+    </div>
+
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+        <script type="text/javascript">
+            $.get('{% url "line_chart_json_tendencies" %}', function(data) {
+                var ctx = $("#myChart4").get(0).getContext("2d");
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: data,
+                    options: {
+                         maintainAspectRatio: false,
+                         responsive: false,
+                         elements: {
+                            line: {
+                                tension: 0
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+
+</div>
+</body>
+</html>
